@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js" integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="../css/cadastraPergunta.css">
+    <title>Cadastro de Perguntas</title>
+</head>
+<body>
+    <header>CADASTRO DE PERGUNTAS</header>
+    <br>
+    
+        Pergunta |
+        <button onclick="preparaCodigo();">PRE</button>
+        <br>
+        <textarea id="txArea_pergunta" cols="70" rows="5"></textarea><br>
+        <br>Respostas
+        <br>A: <input type="text" name="" id="respA">
+        <br>B: <input type="text" name="" id="respB">
+        <br>C: <input type="text" name="" id="respC">
+        <br>D: <input type="text" name="" id="respD">
+        <br>
+        <br>Resposta correta
+        <br><select id="selRespCorreta">
+            <option value="A">A</option>
+            <option value="B">B</option>
+            <option value="C">C</option>
+            <option value="D">D</option>
+        </select>
+        <br>Disciplina
+        <br><select id="selDisciplina">
+            <option value="AMC">ARQ. E MAN. DE COMPUTADORES</option>
+            <option value="AMC">REDES DE COMPUTADORES</option>
+            
+        </select>
+
+        <br>
+        <br>
+        <button onclick="cadastraPergunta();">CADASTRAR</button>
+    
+
+    <script>
+        function preparaCodigo(){
+            document.getElementById('txArea_pergunta').value = "Pergunta: <br><pre>codigo</pre><br> De acordo com o código acima, qual valor será impresso na tela?"
+        }
+    
+        function cadastraPergunta() {
+            //console.log('Pergunta: ' + document.getElementById('txArea_pergunta').value)
+            //console.log('resposta A: ' + document.getElementById('respA').value)
+            ///console.log('resposta B: ' + document.getElementById('respB').value)
+            ///console.log('resposta C: ' + document.getElementById('respC').value)
+            //console.log('resposta D: ' + document.getElementById('respD').value)
+            console.log('resposta Correta: ' + document.getElementById('selRespCorreta').value)
+
+
+            $.ajax({
+                url: "../backend/cadastraPergunta.php", //Endereço da requicição
+                type: "POST", //tipo da requisição
+                data: { perg: document.getElementById('txArea_pergunta').value,
+                        a: document.getElementById('respA').value,
+                        b: document.getElementById('respB').value,
+                        c: document.getElementById('respC').value,
+                        d: document.getElementById('respD').value,
+                        resp: document.getElementById('selRespCorreta').value,
+                        disciplina: document.getElementById('selDisciplina').value,
+                      }, //os dados da requisição
+                dataType: "text" // o formato dos dados da requisição. pode ser HTML. XML, JSON e JSONP
+            }).done(function (msg) {
+               console.log(msg);
+               alert(msg);
+               window.location.reload();
+                    
+            }).fail(function (obj) {
+                console.log(obj);
+                alert("Requisicao falhou: " + obj.status);
+            });
+        }
+        
+         document.getElementById('respA').innerText = ""
+         document.getElementById('respB').innerText = ""
+         document.getElementById('respC').innerText = ""
+         document.getElementById('respD').innerText = ""
+         document.getElementById('txArea_pergunta').innerText = ""
+    </script>
+    
+</body>
+</html>

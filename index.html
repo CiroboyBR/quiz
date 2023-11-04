@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
+        integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3"
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js"
+        integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V"
+        crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="css/exibePergunta.css?v=16">
+        <script src="libs/sweetalert2.all.js?v=2"></script>
+
+    <title>QuizGerardo</title>
+
+</head>
+
+<body>
+    
+    <div id="containerSel">
+       <select name="selTurma" id="selTurma" onchange="alteraDisciplina()">
+            <option value="4">LÓGICA</option>
+            <option value="5">SO LIVRES</option>
+            <!-- <option value="2">2º Informática</option> -->
+            <!-- <option value="1">1º Redes de Computadores</option> -->
+            <!-- <option value="0">Todas as Disciplinas</option> -->
+        </select>
+        
+        <audio controls loop id="audioMusica">
+            <source id="somMusica" src="music/trilha.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio> 
+
+        <img id="somEfeitos" src="img/icone_som_on.png" title="Ligar/Desligar sons exceto a musica" onclick="desligaEfeitos()">
+    </div>
+
+
+    <div id="container">
+        <div id="divCadastro">
+            Pontos: <span id="painelPontos">0</span>
+            <br>
+            <div id="areaPergunta"></div>
+            <br>
+            <input type="radio" name="resp" id="selA"> - A) <span id="itemA"></span><br>
+            <input type="radio" name="resp" id="selB"> - B) <span id="itemB"></span><br>
+            <input type="radio" name="resp" id="selC"> - C) <span id="itemC"></span><br>
+            <input type="radio" name="resp" id="selD"> - D) <span id="itemD"></span><br>
+            <br><br>
+            <button id="btResponder" onclick="respondePergunta()">Responder</button>
+            
+        </div>
+    </div>
+
+    <div id="container2">
+        <div id="divRanking">
+            RANKING <br>
+            <table id="tabRank">
+                <tr>
+                    <td>PONTOS</td>
+                    <td>NOME</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+    <video id="bVideo" autoplay loop muted>
+        <source src="video/b1.mp4" type="video/mp4">
+    </video>
+
+    <style>
+    
+        #bVideo {
+        width: 100vw;
+        height: 100vh;
+        object-fit: cover;
+        position: fixed;
+        left: 0;
+        right: 0;
+        top: 0;
+        bottom: 0;
+        z-index: -1;
+        }
+
+        #somEfeitos{
+            width: 5%;
+            aspect-ratio: 2 / 1;
+            margin-left: 2%;
+            border-radius: 15px;
+        }
+
+        #selTurma, #somMusica{
+            
+            border-radius: 15px;
+        }
+
+        
+    
+    </style>
+
+    <script src="js/exibePergunta.js?v=19">
+        var h = window.innerHeight;
+        
+
+        $(document).ready(function(){
+            $('#divCadastro').css('height', h)
+            $('#divRanking').css('height', h)
+        });
+        
+        
+
+    </script>
+
+
+</body>
+
+</html>
